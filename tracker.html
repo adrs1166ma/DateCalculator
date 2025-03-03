@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Programa de Seguimiento de Estudios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://ai-public.creatie.ai/gen_page/tailwind-custom.css" rel="stylesheet">    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.5?plugins=forms@0.5.7,typography@0.5.13,aspect-ratio@0.4.2,container-queries@0.1.1"></script>
+    <script src="https://ai-public.creatie.ai/gen_page/tailwind-config.min.js" data-color="#000000" data-border-radius="medium"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <nav class="bg-white shadow">
+        <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">            
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">                        
+                        <img class="h-8 w-auto" src="" alt="XD">
+                    </div>                    
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="tracker.html" 
+                            class="border-custom text-custom inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">                            
+                            Dashboard
+                        </a>
+                        <a href="index.html" 
+                            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">                            
+                            Calculadora de Fechas
+                        </a>
+                        <a href="#" 
+                            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">                            
+                            Progreso
+                        </a>
+                        <a href="#" 
+                            class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">                            
+                            Estadísticas
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center">                    
+                    <button class="bg-custom text-white !rounded-button px-4 py-2 text-sm font-medium">
+                        <i class="fas fa-plus mr-2"></i>Nueva Entrada
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">        
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div class="bg-white rounded-lg shadow p-6">                
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-custom bg-opacity-10">
+                        <i class="fas fa-video text-custom text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-sm font-medium text-gray-500">Total Videos</h3>
+                        <p class="text-lg font-semibold text-gray-900">120</p>
+                    </div>
+                </div>            
+            </div>
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-custom bg-opacity-10">                        
+                        <i class="fas fa-clock text-custom text-xl"></i>
+                    </div>
+                    <div class="ml-4">                        
+                        <h3 class="text-sm font-medium text-gray-500">Duración Total</h3>
+                        <p class="text-lg font-semibold text-gray-900">48 horas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow p-6">                
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-custom bg-opacity-10">
+                        <i class="fas fa-chart-line text-custom text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-sm font-medium text-gray-500">Progreso</h3>
+                        <p class="text-lg font-semibold text-gray-900">35%</p>
+                    </div>
+                </div>            
+            </div>
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-custom bg-opacity-10">                        
+                        <i class="fas fa-calendar-alt text-custom text-xl"></i>
+                    </div>
+                    <div class="ml-4">                        
+                        <h3 class="text-sm font-medium text-gray-500">Días Restantes</h3>
+                        <p class="text-lg font-semibold text-gray-900">45 días</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">            
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-6">
+                    <h2 class="text-lg font-medium text-gray-900">Entrada Diaria</h2>
+                    <form class="mt-6 space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Videos Vistos</label>
+                            <input type="number" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom" placeholder="0">                        
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Tiempo de Video (minutos)</label>
+                            <input type="number" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom" placeholder="0">                        
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Tiempo Real (minutos)</label>
+                            <input type="number" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom" placeholder="0">                        
+                        </div>
+                        <button type="submit" class="w-full bg-custom text-white !rounded-button py-2 px-4 text-sm font-medium">                            
+                            Guardar Entrada
+                        </button>
+                    </form>
+                </div>            
+            </div>
+
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-6">
+                    <h2 class="text-lg font-medium text-gray-900">Progreso Diario</h2>
+                    <div id="progressChart" class="h-80 mt-4"></div>
+                </div>
+            </div>        
+        </div>
+
+        <div class="mt-8 bg-white rounded-lg shadow">
+            <div class="p-6">
+                <h2 class="text-lg font-medium text-gray-900">Configuración de Disponibilidad</h2>
+                <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
+                    <div>                        
+                        <label class="block text-sm font-medium text-gray-700">Horas Diarias Disponibles</label>
+                        <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom">                            
+                            <option>1 hora</option>
+                            <option>2 horas</option>
+                            <option>3 horas</option>
+                            <option>4 horas</option>
+                            <option>5 horas</option>
+                        </select>                    
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Días por Semana</label>
+                        <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom">                            
+                            <option>3 días</option>
+                            <option>4 días</option>
+                            <option>5 días</option>
+                            <option>6 días</option>
+                            <option>7 días</option>
+                        </select>                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const chart = echarts.init(document.getElementById('progressChart'));
+        const option = {
+            animation: false,
+            tooltip: {
+                trigger: 'axis'
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom']
+            },
+            yAxis: {
+                type: 'value',
+                name: 'Videos Completados'
+            },
+            series: [{
+                data: [5, 7, 3, 8, 6, 4, 9],
+                type: 'line',
+                smooth: true,
+                lineStyle: {
+                    color: '#4F46E5'
+                },
+                itemStyle: {
+                    color: '#4F46E5'
+                }
+            }]
+        };
+        chart.setOption(option);
+        window.addEventListener('resize', () => chart.resize());
+    </script>
+</body>
+</html>
