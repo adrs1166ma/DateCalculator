@@ -100,35 +100,74 @@
                 <h2 class="text-lg font-medium text-gray-900">
                     Configuración del Curso
                 </h2>
-                <form class="mt-6 space-y-6">
+                <form id="courseConfigForm" class="mt-6 space-y-6">
                     <div>
                         <label class="block text-sm font-medium text-gray-700"
                             >Total de Videos del Curso</label
                         >
                         <input
                             type="number"
+                            id="totalVideos"
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom"
                             placeholder="0"
+                            required
                         />
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700"
                             >Duración Total del Curso (horas)</label
-                        ><input
+                        >
+                        <input
                             type="number"
+                            id="totalDuration"
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom"
                             placeholder="0"
+                            required
                         />
                     </div>
                     <button
                         type="submit"
                         class="w-full bg-custom text-white !rounded-button py-2 px-4 text-sm font-medium"
-                        >
+                    >
                         Guardar Configuración
                     </button>
                 </form>
             </div>
         </div>
+        
+        <script>
+            // Obtener el formulario y agregar un listener para el evento 'submit'
+            document.getElementById('courseConfigForm').addEventListener('submit', function (event) {
+                event.preventDefault(); // Evitar que el formulario se envíe y recargue la página
+        
+                // Obtener los valores de los campos
+                const totalVideos = document.getElementById('totalVideos').value.trim();
+                const totalDuration = document.getElementById('totalDuration').value.trim();
+        
+                // Validar que los campos no estén vacíos y sean números válidos
+                if (!totalVideos || isNaN(totalVideos) || parseInt(totalVideos) <= 0) {
+                    alert('Por favor, ingresa un número válido para el total de videos.');
+                    return;
+                }
+        
+                if (!totalDuration || isNaN(totalDuration) || parseFloat(totalDuration) <= 0) {
+                    alert('Por favor, ingresa un número válido para la duración total del curso.');
+                    return;
+                }
+        
+                // Convertir los valores a números
+                const totalVideosNumber = parseInt(totalVideos);
+                const totalDurationNumber = parseFloat(totalDuration);
+        
+                // Imprimir los valores en la consola
+                console.log('Datos del Curso:');
+                console.log(`- Total de Videos: ${totalVideosNumber}`);
+                console.log(`- Duración Total (horas): ${totalDurationNumber}`);
+        
+                // Aquí puedes agregar más lógica, como guardar los datos en localStorage o procesarlos.
+                alert('Configuración guardada correctamente. Revisa la consola para ver los datos.');
+            });
+        </script>
 
         <div class="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">            
             <div class="bg-white rounded-lg shadow">
