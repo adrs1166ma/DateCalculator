@@ -95,6 +95,8 @@
             </div>
         </div>
 
+<!-- ------------------------------- Configuración del Curso ------------------------------- -->
+
         <div class="mt-6 bg-white rounded-lg shadow">
             <div class="p-6">
                 <h2 class="text-lg font-medium text-gray-900">
@@ -141,103 +143,108 @@
                 </form>
             </div>
         </div>
-        
-        <script>
-            // Obtener elementos del DOM
-            const form = document.getElementById('courseConfigForm');
-            const totalVideosInput = document.getElementById('totalVideos');
-            const totalDurationInput = document.getElementById('totalDuration');
-            const errorTotalVideos = document.getElementById('errorTotalVideos');
-            const errorTotalDuration = document.getElementById('errorTotalDuration');
-        
-            // Función de validación genérica
-            function validateField(value, fieldName) {
-                if (!value || isNaN(value) || parseFloat(value) <= 0) {
-                    return `El campo "${fieldName}" debe ser un número válido mayor que 0.`;
-                }
-                return null; // No hay errores
-            }
-        
-            // Función para mostrar/ocultar errores
-            function toggleError(element, message) {
-                if (message) {
-                    element.textContent = message;
-                    element.classList.remove('hidden');
-                } else {
-                    element.textContent = '';
-                    element.classList.add('hidden');
-                }
-            }
-        
-            // Manejador del evento 'submit'
-            form.addEventListener('submit', function (event) {
-                event.preventDefault(); // Evitar recarga de la página
-        
-                // Validar campos
-                const totalVideos = totalVideosInput.value.trim();
-                const totalDuration = totalDurationInput.value.trim();
-        
-                const errors = {
-                    totalVideos: validateField(totalVideos, 'Total de Videos'),
-                    totalDuration: validateField(totalDuration, 'Duración Total')
-                };
-        
-                // Mostrar errores si existen
-                toggleError(errorTotalVideos, errors.totalVideos);
-                toggleError(errorTotalDuration, errors.totalDuration);
-        
-                // Si no hay errores, procesar los datos
-                if (!errors.totalVideos && !errors.totalDuration) {
-                    const courseData = {
-                        totalVideos: parseInt(totalVideos),
-                        totalDuration: parseFloat(totalDuration)
-                    };
-        
-                    // Imprimir datos en la consola
-                    console.log('Datos del Curso:', courseData);
-        
-                    // Opcional: Guardar en localStorage
-                    localStorage.setItem('courseConfig', JSON.stringify(courseData));
-        
-                    // Feedback al usuario
-                    alert('Configuración guardada correctamente. Revisa la consola para ver los datos.');
-                }
-            });
-        
-            // Cargar datos previamente guardados (opcional)
-            window.addEventListener('DOMContentLoaded', () => {
-                const savedData = localStorage.getItem('courseConfig');
-                if (savedData) {
-                    const { totalVideos, totalDuration } = JSON.parse(savedData);
-                    totalVideosInput.value = totalVideos;
-                    totalDurationInput.value = totalDuration;
-                }
-            });
-        </script>
 
+        <script src="js/course-config.js"></script>
+
+<!-- -------------------------------END Configuración del Curso ------------------------------- -->
+        
         <div class="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-2">            
-            <div class="bg-white rounded-lg shadow">
-                <div class="p-6">
-                    <h2 class="text-lg font-medium text-gray-900">Entrada Diaria</h2>
-                    <form class="mt-6 space-y-6">
+            
+<!-- ------------------------------- Registro de Videos Vistos ------------------------------- -->
+            
+            <div class="max-w-md mx-auto bg-white shadow rounded-lg p-8">
+                <h1 class="text-2xl font-bold text-gray-900 text-center mb-8">
+                    Registro de Videos Vistos
+                </h1>
+
+                <form id="videoTrackingForm" class="space-y-6">
+                    <!-- Rango de Videos -->
+                    <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Videos Vistos</label>
-                            <input type="number" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom" placeholder="0">                        
+                            <label for="video-inicial" class="block text-sm font-medium text-gray-700 mb-1">Video Inicial</label>
+                            <input type="number" id="video-inicial" name="video-inicial" min="1" class="block w-full !rounded-button border-gray-300 shadow-sm focus:ring-custom focus:border-custom sm:text-sm" required />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Tiempo de Video (minutos)</label>
-                            <input type="number" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom" placeholder="0">                        
+                            <label for="video-final" class="block text-sm font-medium text-gray-700 mb-1">Video Final</label>
+                            <input type="number" id="video-final" name="video-final" min="1" class="block w-full !rounded-button border-gray-300 shadow-sm focus:ring-custom focus:border-custom sm:text-sm" required />
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700">Tiempo Real (minutos)</label>
-                            <input type="number" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-custom focus:ring-custom" placeholder="0">                        
+                    </div>
+
+                    <!-- Duración del Video -->
+                    <div>
+                        <label for="duracion" class="block text-sm font-medium text-gray-700 mb-1">Duración del Video (minutos)</label>
+                        <input type="number" id="duracion" name="duracion" min="0" class="block w-full !rounded-button border-gray-300 shadow-sm focus:ring-custom focus:border-custom sm:text-sm" required />
+                    </div>
+
+                    <!-- Tiempo Real Invertido -->
+                    <div class="space-y-3">
+                        <label class="block text-sm font-medium text-gray-700">Tiempo Real Invertido</label>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <input type="radio" id="formato-hhmmss" name="formato-tiempo" value="hhmmss" class="h-4 w-4 text-custom border-gray-300 focus:ring-custom" checked />
+                                <label for="formato-hhmmss" class="ml-2 block text-sm text-gray-700">Formato hh:mm:ss</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="radio" id="formato-minutos" name="formato-tiempo" value="minutos" class="h-4 w-4 text-custom border-gray-300 focus:ring-custom" />
+                                <label for="formato-minutos" class="ml-2 block text-sm text-gray-700">Minutos</label>
+                            </div>
                         </div>
-                        <button type="submit" class="w-full bg-custom text-white !rounded-button py-2 px-4 text-sm font-medium">                            
-                            Guardar Entrada
+                        <div id="tiempo-container">
+                            <input type="text" id="tiempo-hhmmss" pattern="[0-9]{2}:[0-9]{2}:[0-9]{2}" placeholder="00:00:00" class="block w-full !rounded-button border-gray-300 shadow-sm focus:ring-custom focus:border-custom sm:text-sm" required />
+                            <input type="number" id="tiempo-minutos" min="0" class="hidden block w-full !rounded-button border-gray-300 shadow-sm focus:ring-custom focus:border-custom sm:text-sm" />
+                        </div>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="flex space-x-4">
+                        <button id="guardar-btn" type="submit" class="flex-1 !rounded-button bg-custom py-2 px-4 text-white text-sm font-medium hover:bg-custom/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom">
+                            <i class="fas fa-save mr-2"></i>Guardar
                         </button>
-                    </form>
-                </div>            
+                        <button id="nueva-nota-btn" type="button" class="flex-1 !rounded-button bg-white py-2 px-4 text-gray-700 text-sm font-medium border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-custom">
+                            <i class="fas fa-plus mr-2"></i>Nueva Nota
+                        </button>
+                    </div>
+                </form>
             </div>
+
+            <!-- <script>
+                const formatoHhmmss = document.getElementById("formato-hhmmss");
+                const formatoMinutos = document.getElementById("formato-minutos");
+                const tiempoHhmmss = document.getElementById("tiempo-hhmmss");
+                const tiempoMinutos = document.getElementById("tiempo-minutos");
+        
+                function toggleFormato() {
+                    if (formatoHhmmss.checked) {
+                    tiempoHhmmss.style.display = "block";
+                    tiempoMinutos.style.display = "none";
+                    tiempoHhmmss.required = true;
+                    tiempoMinutos.required = false;
+                    } else {
+                    tiempoHhmmss.style.display = "none";
+                    tiempoMinutos.style.display = "block";
+                    tiempoHhmmss.required = false;
+                    tiempoMinutos.required = true;
+                    }
+                }
+        
+                formatoHhmmss.addEventListener("change", toggleFormato);
+                formatoMinutos.addEventListener("change", toggleFormato);
+        
+                tiempoHhmmss.addEventListener("input", function (e) {
+                    let value = e.target.value;
+                    value = value.replace(/\D/g, "");
+                    if (value.length > 6) value = value.slice(0, 6);
+                    if (value.length >= 2) value = value.slice(0, 2) + ":" + value.slice(2);
+                    if (value.length >= 5) value = value.slice(0, 5) + ":" + value.slice(5);
+                    e.target.value = value;
+                });
+            </script> -->
+            <script src="js/video-progress.js"></script>
+
+
+
+<!-- ------------------------------- END Registro de Videos Vistos ------------------------------- -->
+
 
             <div class="bg-white rounded-lg shadow">
                 <div class="p-6">
@@ -306,5 +313,7 @@
         chart.setOption(option);
         window.addEventListener('resize', () => chart.resize());
     </script>
+    <!-- <script src="js/courseConfig.js"></script>
+    <script src="js/progressNote.js"></script> -->
 </body>
 </html>
